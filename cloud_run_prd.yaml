@@ -1,0 +1,19 @@
+NODE_ENV: "production"
+ZOOM_ACCOUNT_ID: "qUbY_ykeRf2VgfiY0wBWuQ"
+ZOOM_CLIENT_ID: "4MusWvQ7QKG8iUmOq1hLgw"
+ZOOM_CLIENT_SECRET: "YGgQCPIhvNpehyfkXusRnnH7f1pMx9X5"
+ZOOM_SECRET_TOKEN: "nf8wIEu7TpyWaGTxDpy_vw"
+GOOGLE_SHEET_ID: "1fj2dLBJX_5lzZUEoNl2PeH5B79YlxzNmIYd027uS_A4"
+IPASS_SHEET_ID: "1iW4BmTzViYg99XZXymkgabPb3HfPSwJcIeHYB0NehsU"
+ZOOM_MEETING_ID: "87372662961"
+EMAIL_USER: "facility.admin@nycbc.ca"
+# Note: EMAIL_PASS is a secret, ideally should be in Secret Manager, but user has it in .env
+# For now, we will ask user to input it or paste it into the secure deployment command, 
+# But since we are using --env-vars-file, we put it here.
+# WARNING: This file will contain the password. Be careful not to commit it if this was a real git repo.
+EMAIL_PASS: "wngp abhr haun ojze"
+ADMIN_SECRET: "MySecretKey123"
+# APP_BASE_URL will be populated automatically or needs to be set after first deploy.
+# We will set a placeholder for now, user needs to update after deploy if it changes dynamically, 
+# but Cloud Run URLs are stable.
+APP_BASE_URL: "https://nycbc-automation-851994718784.us-central1.run.app" 

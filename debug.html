@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Card Manager Free Validation Application</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/v2/Content/Images/NewPrecise_icon.ico">
+
+    <link rel="stylesheet" href="/v2/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="/v2/Content/LoginV2.css">
+    <link rel="stylesheet" href="/v2/Content/Loader.css">
+    <link rel="stylesheet" href="/v2/Content/pretty-checkbox.min.css">
+    <link rel="stylesheet" href="/v2/Content/jquery-ui.min.css">
+    <link rel="stylesheet" href="/v2/Content/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PSJMD5K"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-PSJMD5K"></script>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YB7YKEH3PJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YB7YKEH3PJ', {
+            cookie_domain: '.preciserd.com',
+            cookie_flags: 'SameSite=Lax;Secure=true'
+        });
+        //gtag('config', 'G-YB7YKEH3PJ');
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PSJMD5K');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <script src="/v2/Scripts/JQueryBootstrap?v=WW2VZdZAZbJhdlydY4Aj_TEHXjIHABeg6tad1G5gs5g1"></script>
+
+</head>
+
+<body>
+    <main role="main">
+        <video autoplay="" muted="" loop="" id="bgVideo" alt="">
+            <source src="/v2/Content/Images/Client_BG_Animated.mp4" type="video/mp4">
+        </video>
+        <div id="bgWhite"></div>
+        <button class="btn btn-pause" id="bgPause" onclick="videoPausePlay()" alt="Pause/unpause background" tabindex="-1"><i class="fa fa-pause-circle"></i></button>
+
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PSJMD5K"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="content mt-3 mb-3 col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                    <div class="loader_panel" id="loader_panel" style="text-align:center;">
+                        <div class="loader">
+                        </div>
+                    </div>
+                    <input type="hidden" href="/v2/ADM">
+
+                    <!--Header-->
+                    <div class="row mt-3 mb-4">
+                        <div class="col-sm-12 text-center">
+                            <p class="mb-3 h5">Welcome</p>
+                            <h1 class="mb-md-1 mb-3">Parking Permit Management</h1>
+                            <h2><strong>IPASS™</strong> powered by <strong>Precise ParkLink™</strong></h2>
+                        </div>
+                    </div>
+                        
+                    <div class="row mb-3">
+                        <div class="col-md-offset-1 col-md-10">
+                            <ul class="nav nav-pills nav-justified">
+                                <li class="pill active" id="client-form-link" onclick="openTabPage(event, 'Client')">
+                                    <a>Client</a>
+                                </li>
+                                <li class="pill" id="validation-form-link" onclick="openTabPage(event, 'Validation')">
+                                    <a>Validation</a>
+                                </li>
+                                <li class="pill" id="operator-form-link" onclick="openTabPage(event, 'Operator')">
+                                    <a>Operator</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                        
+                    <input type="hidden" name="UserAgent" id="UserAgent">
+                    <!--Login Form-->
+                    <form id="login-form" action="/v2/" method="post" role="form">
+                        <div class="row mb-3">
+                            <div class="col-md-offset-1 col-md-10">
+                                <div class="form-group">
+                                    <input type="text" name="UserName" id="UserName" class="form-control" placeholder="Username" value="scheng">
+                                </div>                                
+                                <div class="form-group">
+                                    <input type="password" name="Password" id="Password" autocomplete="off" class="form-control" placeholder="Password" value="scheng">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="LoginType" id="LoginType" value="1">
+
+                        <!--Error Messages-->
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-10">
+                                    <div class="text-danger" id="ErrorMessage">User account requires updating the password. Please reset the password or contact IPass for help.</div>
+                                </div>
+                            </div>
+
+                        <!--Remember me & Forgot pw-->
+                        <div class="row mt-3 mb-md-3 mb-4">
+                            <div class="col-md-offset-1 col-md-5">
+                                <div class="form-group">
+                                    <div class="pretty p-switch p-fill" style="margin:10px auto;">
+                                        <input name="remember" id="remember-client" type="checkbox">
+                                        <div class="state p-success">
+                                            <label for="remember-client">Remember Me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 text-sm-right">
+                                <div class="form-group">
+                                    <a id="client-form" class="forgot-password" style="display:block;" href="/v2/Home/ClientForgotPassword">Forgot Password?</a>
+                                    <a id="validation-form" class="forgot-password" href="/v2/Home/ValidationForgotPassword" style="display: none;">Forgot Password?</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Sign In Button-->
+                        <div class="row mb-3">
+                            <div class="col-md-offset-1 col-md-10">
+                                <div class="form-group">
+                                    <input type="submit" name="login-submit" id="login-submit" class="btn btn-login btn-mobile-full" value="LOG IN">
+                                </div>
+                            </div>
+                        </div>
+
+                            <!--Language Buttons-->
+                            <div class="row">
+                                <div class="col-sm-12 text-right">
+                                    <div data-toggle="buttons">
+                                        <label class="btn btn-language active" onclick="SetLanguage(1)" for="Lang-EN">
+                                            <input type="radio" class="btn-check" name="languages" id="Lang-EN" autocomplete="off">English
+                                        </label>
+                                        <label class="btn btn-language " onclick="SetLanguage(2)" for="Lang-FR">
+                                            <input type="radio" class="btn-check" name="languages" id="Lang-FR" autocomplete="off">Français
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+                        
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="border-top footer text-muted desktop-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    © 2026 PRECISE PARKLINK INC. ALL RIGHTS RESERVED
+                </div>
+                <div class="col-lg-6">
+                    <div class="float-sm-end">
+                        <a href="https://www.preciseparklink.com/privacy-policy" target="_blank">Privacy Policy</a>&nbsp;|&nbsp;
+                        <a href="https://www.preciseparklink.com/privacy-breach-policy" target="_blank">Privacy Breach Policy</a>&nbsp;|&nbsp;
+                        <a href="https://www.preciseparklink.com/terms-conditions">Terms &amp; Conditions</a>&nbsp;|&nbsp;
+                        <a href="https://www.preciseparklink.com/accessibility-customer-service-policy" target="_blank">Accessibility</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <footer class="footer mobile-footer pb-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 mb-3">
+                    <img src="/v2/Content/Images/Logos/NewPreciseLogo.png" alt="">
+                </div>
+                <div class="col-sm-12 mb-3 ps-5 pe-5">
+                    <a href="https://www.preciseparklink.com/privacy-policy" target="_blank">Privacy Policy</a>&nbsp;|&nbsp;
+                    <a href="https://www.preciseparklink.com/privacy-breach-policy" target="_blank">Privacy Breach Policy</a><br>
+                    <a href="https://www.preciseparklink.com/terms-conditions" target="_blank">Terms &amp; Conditions</a>&nbsp;|&nbsp;
+                    <a href="https://www.preciseparklink.com/accessibility-customer-service-policy" target="_blank">Accessibility</a>
+                </div>
+                <div class="col-sm-12">
+                    © 2026 PRECISE PARKLINK INC. ALL RIGHTS RESERVED
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+<script>
+    $('document').ready(function () {
+        setTimeout(function () {
+                    
+                    $("#client-form-link").trigger('click');
+                    
+        }, 10);
+    });
+
+    function openTabPage(evt, divName) {
+        if (divName == 'Client') {
+            $('#LoginType').val(1);
+            $("#client-form").delay(100).fadeIn(100);
+            $("#validation-form").fadeOut(100);
+            $('#validation-form-link').removeClass('active');
+            $("#operator-form").fadeOut(100);
+            $('#operator-form-link').removeClass('active');
+            $('#client-form-link').addClass('active')
+        }
+        else if (divName == 'Validation') {
+            $('#LoginType').val(2);
+            $("#validation-form").delay(100).fadeIn(100);
+            $("#operator-form").fadeOut(100);
+            $('#operator-form-link').removeClass('active');
+            $("#client-form").fadeOut(100);
+            $('#client-form-link').removeClass('active');
+            $('#validation-form-link').addClass('active')
+        }
+        else if (divName == 'Operator') {
+            $('#LoginType').val(3);
+            $("#operator-form").delay(100).fadeIn(100);
+            $("#validation-form").fadeOut(100);
+            $('#validation-form-link').removeClass('active');
+            $("#client-form").fadeOut(100);
+            $('#client-form-link').removeClass('active');
+            $('#operator-form-link').addClass('active')
+        }
+    }
+
+    $('#login-form').submit(function (e) {
+        //se traen todos los inputs del formulario
+        if ($('#UserName').val().length == 0) {
+            alert("Username cannot be empty!");
+            e.preventDefault();
+        }
+        else if ($('#Password').val().length == 0) {
+            alert('Password cannot be empty!')
+            e.preventDefault();
+        }
+        //var offset = (new Date()).getTimezoneOffset();
+        //$("#TimeOffset").val(offset);
+    });
+
+    function SetLanguage(locate) {
+        console.log(locate);
+        // window.location.href = '/home/Language?locale=' + locate + "&redirect=index";
+        window.location.href = '/v2/Home/Language?locale=' + locate + "&redirect=index";
+    }
+
+    // Get the video
+    var video = document.getElementById("bgVideo");
+
+    // Get the button
+    var btn = document.getElementById("bgPause");
+
+    // Pause and play the video, and change the button text
+    function videoPausePlay() {
+        if (video.paused) {
+            video.play();
+            $(btn).find('i').toggleClass('fa-pause-circle fa-play-circle');
+            //btn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
+        } else {
+            video.pause();
+            $(btn).find('i').toggleClass('fa-play-circle fa-pause-circle');
+            //btn.innerHTML = "<i class='fa-regular fa-circle-play'></i>";
+        }
+    }
+</script></body></html>

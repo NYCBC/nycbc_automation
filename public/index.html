@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYCBC BMM Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        :root {
+            --primary-color: #0F3057;
+            /* Dark Blue from nycbc_connect */
+            --accent-color: #E63946;
+            /* Alert Red for errors */
+            --bg-color: #F8F9FA;
+            --text-color: #333;
+            --input-bg: #E9ECEF;
+            --white: #fff;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: var(--white);
+            max-width: 500px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Access-style Banner */
+        .banner {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .banner h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .banner p {
+            margin: 0.5rem 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 1.5rem;
+            top: 2rem;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .form-content {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            /* Fix padding expanding width */
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(15, 48, 87, 0.1);
+        }
+
+        input[readonly] {
+            background-color: var(--input-bg);
+            color: #555;
+            cursor: not-allowed;
+            border-color: transparent;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: #0d2847;
+        }
+
+        .btn-submit:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Modern Success Modal/Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #D4EDDA;
+            color: #155724;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 1rem;
+        }
+
+        .error-box {
+            background-color: #F8D7DA;
+            color: #721C24;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="banner">
+            <!-- Optional Back Arrow 
+        <a href="#" class="back-btn">&#8592;</a> 
+        -->
+            <h2>NYCBC 2025 4th BMM Registration</h2>
+            <p>Sunday, December 14, 2025 • 2:00 p.m.</p>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loader" style="text-align:center; padding: 3rem;">
+            <p>Loading member data...</p>
+        </div>
+
+        <!-- Main Form -->
+        <form id="regForm" class="form-content hidden">
+
+            <!-- Combined Name Field -->
+            <div class="form-group">
+                <label>Name / 姓名</label>
+                <input type="text" id="fullName" name="fullName" readonly>
+            </div>
+
+            <!-- Hidden inputs for backend logic -->
+            <input type="hidden" id="firstName" name="firstName">
+            <input type="hidden" id="lastName" name="lastName">
+
+            <div class="form-group">
+                <label>Email / 電郵</label>
+                <input type="email" id="email" name="email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Congregation / 堂會</label>
+                <input type="text" id="congregation" name="congregation" readonly>
+            </div>
+
+            <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #eee;">
+
+            <div class="form-group">
+                <label>Do you require Chinese translation?<br>你需要中文翻譯嗎？ (會議將以英文進行)</label>
+                <select id="translation" name="translation" required>
+                    <option value="" disabled>Select / 請選擇</option>
+                    <option value="None" selected>No, I don't need it. (不需要)</option>
+                    <option value="Cantonese">Yes, Cantonese (需要廣東話翻譯)</option>
+                    <option value="Mandarin">Yes, Mandarin (需要普通話翻譯)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Is a proxy attending on your behalf?<br>有否邀請别人作為您的授權人?</label>
+                <select id="proxy" name="proxy" required onchange="toggleProxyField()">
+                    <option value="No">No (沒有)</option>
+                    <option value="Yes">Yes (有)</option>
+                </select>
+                <small id="proxyNote" class="hidden" style="color: #6c757d; display:block; margin-top:5px;">
+                    * Only active members can assign a proxy. / 只適用於活躍會友
+                </small>
+            </div>
+
+            <div class="form-group hidden" id="proxyField">
+                <label>Who is your proxy? / 您的授權人是誰?</label>
+                <input type="text" id="proxyName" name="proxyName" placeholder="Enter proxy name">
+            </div>
+
+            <div id="errorMsg" class="error-box hidden"></div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">Register / 註冊</button>
+        </form>
+
+        <!-- Success Overlay -->
+        <div id="successOverlay" class="overlay hidden">
+            <div class="success-icon">✓</div>
+            <h3 style="margin-top:0; color:var(--primary-color);">Registration Successful!<br>註冊成功!</h3>
+            <p style="color:#666;">Please check your email for the Zoom link.<br>請檢查您的電郵以獲取 Zoom 鏈接。</p>
+            <button onclick="window.close()"
+                style="margin-top:2rem; padding:0.8rem 2rem; background:transparent; border:1px solid #ccc; color:#666; border-radius:5px; cursor:pointer;">Close</button>
+        </div>
+
+        <!-- Fatal Error Overlay -->
+        <div id="fatalError" class="overlay hidden">
+            <div class="success-icon" style="background:#F8D7DA; color:#721C24;">✕</div>
+            <h3 style="margin-top:0; color:#721C24;">Access Denied</h3>
+            <p id="fatalErrorMsg" style="color:#666;">Invalid Link</p>
+        </div>
+
+        <div style="text-align: center; color: #ccc; font-size: 0.8rem; margin-top: 20px;">
+            v2.1 (Fix-ExplicitSheet)
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        // DOM Elements
+        const loader = document.getElementById('loader');
+        const form = document.getElementById('regForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const fatalError = document.getElementById('fatalError');
+
+        // Init
+        if (!token) {
+            showFatalError('Missing registration token / 缺少註冊鏈接');
+        } else {
+            fetchMemberData();
+        }
+
+        function showFatalError(msg) {
+            loader.classList.add('hidden');
+            fatalError.classList.remove('hidden');
+            document.getElementById('fatalErrorMsg').innerText = msg;
+        }
+
+        function showError(msg) {
+            errorMsg.innerText = msg;
+            errorMsg.classList.remove('hidden');
+        }
+
+        async function fetchMemberData() {
+            try {
+                const res = await fetch(`/api/member/${token}`);
+                const data = await res.json();
+
+                if (data.success && data.member) {
+                    const m = data.member;
+
+                    // Name Logic: Nickname + Last Name OR First Name + Last Name
+                    // We use "firstNameOnly" if available (added in recent backend fix), else fallback to firstName
+                    const first = m.firstNameOnly || m.firstName || '';
+                    const nick = m.nickname || '';
+                    const last = m.lastName || '';
+
+                    // Construct Display Name (e.g. "Wilson Chung")
+                    let displayName = '';
+                    if (nick && nick.trim().length > 0) {
+                        displayName = `${nick} ${last}`; // Nick + Last
+                    } else {
+                        displayName = `${first} ${last}`; // First + Last
+                    }
+
+                    // Populate Form
+                    document.getElementById('fullName').value = displayName;
+                    // Keep raw values for submission mostly intact, or send constructed? 
+                    // We'll keep them as hidden fields but maybe update them so Zoom gets the constructed name?
+                    // Actually, let's inject the constructed name into "firstName" field for Zoom if we want Zoom to show "Wilson Chung"
+                    // But the user said "Name inside the form".
+                    document.getElementById('firstName').value = nick || first;
+                    document.getElementById('lastName').value = last;
+
+                    document.getElementById('email').value = m.email;
+                    document.getElementById('congregation').value = m.congregation;
+
+                    // Handle Proxy Logic for Inactive Members
+                    if (m.membershipStatus !== 'Active') {
+                        const proxySelect = document.getElementById('proxy');
+                        proxySelect.value = 'No';
+                        proxySelect.disabled = true;
+                        document.getElementById('proxyNote').classList.remove('hidden');
+                        document.getElementById('proxyNote').innerText = '(Only active members can assign a proxy / 只適用於活躍會友)';
+                    }
+
+                    // Show Form
+                    loader.classList.add('hidden');
+                    form.classList.remove('hidden');
+                } else {
+                    showFatalError(data.message || 'Invalid or expired token');
+                }
+            } catch (e) {
+                console.error(e);
+                showFatalError('Connection error. Please try again.');
+            }
+        }
+
+        function toggleProxyField() {
+            const val = document.getElementById('proxy').value;
+            const field = document.getElementById('proxyField');
+            const input = document.getElementById('proxyName');
+
+            if (val === 'Yes') {
+                field.classList.remove('hidden');
+                input.required = true;
+            } else {
+                field.classList.add('hidden');
+                input.required = false;
+                input.value = '';
+            }
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'Registering...';
+            errorMsg.classList.add('hidden');
+
+            const payload = {
+                // Send the constructed "Nick" as first name to Zoom? 
+                // Or stick to official First Name?
+                // User request: "Name inside the form... should be Nick + Last". (Visual)
+                // Usually Zoom registration takes First/Last. 
+                // We will send what's in the hidden fields (which we set to Nick or First)
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                translation: document.getElementById('translation').value,
+                proxy: document.getElementById('proxy').value,
+                proxyName: document.getElementById('proxyName').value
+            };
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const json = await res.json();
+
+                if (json.success) {
+                    document.getElementById('successOverlay').classList.remove('hidden');
+                    form.classList.add('hidden'); // Hide form behind overlay or just remove it
+                } else {
+                    throw new Error(json.message);
+                }
+            } catch (err) {
+                showError(err.message);
+                btn.disabled = false;
+                btn.innerText = 'Register / 註冊';
+            }
+        });
+
+    </script>
+</body>
+
+</html>

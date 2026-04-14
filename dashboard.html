@@ -1,0 +1,1273 @@
+<!DOCTYPE html><html><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="This application is to manage IPass Validations.">
+    <meta name="author" content="Precise Park Link - SHUN YAO ZHANG">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/v2/Content/Images/NewPrecise_icon.ico">
+    <title>Validation Management</title>
+    <link href="/v2/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="/v2/Content/pretty-checkbox.min.css" rel="stylesheet">
+    
+    <link href="/v2/Content/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/v2/Content/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/v2/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/v2/Content/Data_Tooltip.css" rel="stylesheet">
+    <link href="/v2/Content/styles.css" rel="stylesheet">
+</head>
+
+
+
+
+
+<body style="font-family:FuturaTMedium">
+    
+    <script src="/v2/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="/v2/Scripts/bootstrap.js"></script>
+    
+    <script src="/v2/Content/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="/v2/Content/dist/js/sb-admin-2.js"></script>
+    
+    
+    
+    
+    
+    <script>
+        function CheckData(data) {
+           // console.log(typeof (data));
+            // check if null or undefined
+            if (!data || typeof (data) == 'string' && (data == "Session Error" || data.includes("<!DOCTYPE html>"))) {
+                window.location.href = "/v2/";
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+    <div id="wrapper">
+        <nav class="navbar navbar-default na navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <!-- This is where the user logout and toggle for the type of nav bar goes. -->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <!-- This is where you include the image for the logo -->
+                
+
+                <!-- /.navbar-header -->
+                <div class="headerHeight">
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a href="/v2/Validation/ToggleMenu"><i class="fa fa-medkit fa-fw"></i>Toggle Menu</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-user fa-fw"></i>Welcome Spencer Cheng !</a>
+                                </li>
+                                <li>
+                                    <a href="/v2/Validation/Profile"><i class="fa fa-gear fa-fw"></i>Manage Account</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/v2/Home/Logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+
+                    </ul>
+                </div>
+
+                <!-- The "brand" title -->
+                <div id="appNameDiv"><a class="navbar-brand" href="/v2/Validation">validation management</a></div>
+            </div>
+
+                <!-- /.navbar-top-links -->
+                <div class="nav navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav in" id="side-menu">
+                                <li>
+                                    <a href="/v2/Validation" style="font-family: 'Open Sans', Arial, sans-serif;" class="active"><i class="fa fa-home fa-fw"></i> Issue Validation</a>
+                                </li>
+                            <li>
+                                <a href="/v2/Validation/Profile" style="font-family: 'Open Sans', Arial, sans-serif;"><i class="fa fa-user fa-fw"></i> Profile</a>
+                            </li>
+                                <li>
+                                    <a href="#" style="font-family: 'Open Sans', Arial, sans-serif;"><i class="fa fa-folder fa-fw"></i> Reports <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li>
+                                            <a href="/v2/Validation/IssuedValidationsReport"><i class="fa fa-folder-o fa-fw"></i> Validation Report</a>
+                                        </li>
+                                        <li>
+                                            <a href="/v2/Validation/IssuedValidationsReportChart"><i class="fa fa-line-chart fa-fw"></i> Validation Chart</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper" style="font-size: 1em; min-height: 1029px;">
+            
+
+
+<link href="/v2/Content/Loader.css" rel="stylesheet">
+
+<link href="/v2/Content/FormLayout.css" rel="stylesheet">
+<link href="/v2/Content/jquery-ui.min.css" rel="stylesheet">
+<link href="/v2/Content/jquery.timepicker.css" rel="stylesheet">
+<link href="/v2/Content/PopupToolTip.css" rel="stylesheet">
+<link href="/v2/Content/Message.css" rel="stylesheet">
+<link href="/v2/Content/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+<link href="/v2/Content/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+<script src="/v2/Scripts/jquery.validate.min.js"></script>
+<script src="/v2/Scripts/jquery-ui.min.js"></script>
+<script src="/v2/Scripts/jquery.timepicker.js"></script>
+
+
+
+<script src="/v2/Content/vendor/datatables/js/jquery.dataTables.js"></script>
+<script src="/v2/Content/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="/v2/Content/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+<link href="/v2/Content/vendor/daterangepicker/daterangepicker.css" rel="stylesheet">
+<script src="/v2/Content/vendor/daterangepicker/moment.min.js"></script>
+<script src="/v2/Content/vendor/daterangepicker/daterangepicker.js"></script>
+
+<script src="/v2/Content/bootstrap-multiselect.js"></script>
+<link href="/v2/Content/bootstrap-multiselect.css" rel="stylesheet">
+
+
+
+<style>
+    hr {
+        display: block;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        border-style: inset;
+        border-width: 1px;
+    }
+
+    textarea {
+        resize: none; /* user can resize vertically, but width is fixed */
+    }
+
+    #MonerisConfirmation .card-title {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    #MonerisConfirmation .card-container {
+        margin: 0 0 0 0.5rem;
+    }
+
+    #MonerisConfirmation .card-number {
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    #MonerisConfirmation .card-type-title{
+        font-weight: 800;
+        font-size: 14px;
+    }
+
+    #MonerisConfirmation .card-valid-title {
+        font-weight: 800;
+        font-size: 14px;
+        margin-left: 2rem;
+    }
+
+    #MonerisConfirmation .card-type {
+        font-weight: 500;
+        font-size: 14px;
+        margin-left: 1rem;
+    }
+
+    #MonerisConfirmation .card-valid {
+        font-weight: 500;
+        font-size: 14px;
+        margin-left: 1rem;
+    }
+
+    #MonerisConfirmation .card-name {
+        font-weight: 800;
+        font-size: 16px;
+    }
+
+    #MonerisConfirmation .card-valid-type {
+        display: flex;
+    }
+
+
+</style>
+
+<div class="modal fade" id="ValidationModal" tabindex="-1" role="dialog" aria-labelledby="ValidationModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="ValidationModalLabel">Validation Details</h4>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tbody><tr>
+                        <td>Start:</td>
+                        <td><div id="Confirm_StartDT" style="color:green"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Expire:</td>
+                        <td><div id="Confirm_StartET" style="color:red;"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Charges:</td>
+                        <td><div id="Confirm_TotalCharge"></div></td>
+                    </tr>
+                    <tr>
+                        <td>License Plate:&nbsp;</td>
+                        <td><div id="Confirm_Plate"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Notes:</td>
+                        <td><div id="Confirm_Note"></div></td>
+                    </tr>
+                </tbody></table>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="$()">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SubmitValidation();">Issue Validation</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" style="display:none" id="ShowConfirmation" data-toggle="modal" data-target="#ValidationModal"></button>
+
+
+<div class="modal fade" id="PopUpDialog" tabindex="-1" role="dialog">
+    <div id="modalsize" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="loader_panel" id="loader_panel_dialog">
+                <center>
+                    <div class="loader">
+                    </div>
+                </center>
+            </div>
+            <div class="modal-header">
+                <button type="button" class="close" style="color: white !important; opacity: 50;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <p class="modal-title" id="PopUpHeader"></p>
+            </div>
+            <div class="modal-body" id="PopUpBody">
+            </div>
+            <div class="modal-footer" id="PopUpFooter">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="PopUpCloseBtn" onclick="$()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a type="button" style="display:none" id="_PopUpDialog" data-toggle="modal" data-target="#PopUpDialog"> </a>
+
+<script>
+    $(function () {
+        $('#PopUpDialog').modal({
+            show: false,
+            keyboard: false,
+            backdrop: 'static'
+        });
+    });
+
+    function SetLargeSize() {
+        $('#modalsize').removeClass('modal-sm');
+        $('#modalsize').addClass('modal-lg');
+    }
+
+    function SetSmallSize() {
+        $('#modalsize').removeClass('modal-lg');
+        $('#modalsize').addClass('modal-sm');
+    }
+
+    $('#PopUpDialog').on('hidden.bs.modal', function () {
+        $('#modalsize').removeClass('modal-lg');
+        $('#modalsize').removeClass('modal-sm');
+        //reset modal-dialog width
+    });
+
+    function ShowLoaderPanelDialog() {
+        $('#loader_panel_dialog').css("display", "block");
+    }
+    function HideLoaderPanelDialog() {
+        $('#loader_panel_dialog').css("display", "none");
+    }
+</script>
+<div class="modal fade" id="ValidationPurchaseModal" tabindex="-1" role="dialog" aria-labelledby="ValidationPurchaseModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="ValidationModalLabel">Validation checkout confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tbody><tr>
+                        <td>Start:</td>
+                        <td><div id="Confirm_StartDT" style="color:green"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Expire:</td>
+                        <td><div id="Confirm_StartET" style="color:red;"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Charges:</td>
+                        <td><div id="Confirm_TotalCharge"></div></td>
+                    </tr>
+                    <tr>
+                        <td>License Plate:&nbsp;</td>
+                        <td><div id="Confirm_Plate"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td><div id="Confirm_Email"></div></td>
+                    </tr>
+                </tbody></table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="$()">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="PurchaseValidation();">Process to checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" style="z-index: 1050 !important" id="MonersiPurchaseModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="ValidationModalLabel">Validation checkout confirmation</h4>
+            </div>
+            <div class="modal-body" style="height:100%"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function PurchaseValidation() {
+        $('#loader_panel').css("display", "block");
+        $('#ValidationPurchaseModal').modal('hide');
+        $.post('/v2/commercial/PurchaseValidation', { })
+            .always(function () {
+            })
+            .done(function (data) {
+                $('#MonersiPurchaseModal .modal-body').html(data);
+                $('#MonersiPurchaseModal').modal('show');
+                $('#loader_panel').css("display", "none");
+                //if (data.startsWith('<div id="ThisIsTheMonerisPurchaseRequestPage"></div>')) {
+                //    $('#MonersiPurchasePanel').html(data);
+                //}
+            });
+    }
+</script>
+<div id="MonersiPurchasePanel"></div>
+<div class="modal fade" id="ValidationActionModal" tabindex="-1" role="dialog" aria-labelledby="ValidationActionModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="ValidationActionModalLabel">Confirmation</h4>
+            </div>
+            <input type="hidden" id="ValidationActionType" value="0">
+            <input type="hidden" id="ValidationIDs" value="0">
+            <div class="modal-body FormLayout">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label id="ConfirmationContext"></label>
+                    </div>
+                </div>
+                <div class="row" id="ConfirmationEndDateTime">
+                    <div class="col-lg-6">
+                        <label>End Date</label>
+                        <input type="text" id="EndDate" value="02/28/2026">
+                    </div>
+                    <div class="col-lg-6">
+                        <label>End Time</label>
+                        <input type="text" id="EndTime" value="5:54 PM" class="ui-timepicker-input" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="$()">NO</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="SubmitValidationChange();">YES</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" style="display:none" id="ShowValidationActionConfirmation" data-toggle="modal" data-target="#ValidationActionModal"></button>
+
+<div class="mainPageContent">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header-bar">
+                <p>Issue Validation</p>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12" id="ValidationPanel">
+                <div class="loader_panel" id="loader_panel">
+    <center>
+        <div class="loader">
+        </div>
+    </center>
+</div>      
+<input type="hidden" id="Extending" value="False">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="popup">
+            <span style="font-family: 'Open Sans', Arial, sans-serif;">Sites And Tariffs</span>&nbsp;
+            <a onclick="ShowInstructions();"><span class="glyphicon glyphicon-question-sign"></span> Instructions</a>
+            <a onclick="ShowInstructions();">
+                <span class="popuptext2" id="Instructions" style="padding-left: 10px;">
+                    &nbsp;1) Select site and tariff.<br>
+                    &nbsp;2) Select Validation date &amp; time.<br>
+                    &nbsp;3) Increment/Decrement Duration to Change Expiration Time.<br>
+                    &nbsp;4) Enter License Plate &amp; Confirm charges and expiration time before Save.
+                </span>
+            </a>
+            <script>
+                function ShowInstructions() {
+                    var popup = document.getElementById("Instructions");
+                    popup.classList.toggle("show");
+                }
+            </script>
+        </div>
+    </div>
+    <div class="panel-body" style="background: #f4f7f8; padding:0PX;">
+        <div class="FormLayout">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <label for="Sites">Sites</label>
+                    <select class="form-control selectpicker" name="SelectedSite" id="SelectedSite" data-live-search="true" onchange="ChangeSite(this);">
+                            <option data-tokens="685 Sheppard Avenue East" value="739" selected="">685 Sheppard Avenue East</option>
+                    </select>
+
+                    
+                </div>
+                <div id="TariffZone" class="col-lg-6 col-md-12">
+                    
+<label for="Tariffs">Tariffs</label>
+<select class="form-control" id="SelectedTariff" name="SelectedTariff" onchange="ChangeTariff(this);"><option selected="selected" value="3198">$3.50 / hour</option>
+</select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span style="font-family: 'Open Sans', Arial, sans-serif;">Validation Details</span>
+    </div>
+    <div class="panel-body" style="background: #f4f7f8; padding:0PX;">
+        <div id="ValidationDetail">
+            
+<div class="FormLayout">
+    <div class="row">
+        <form id="ValidationDetailForm" onsubmit="event.preventDefault(); PreSubmitValidation();">
+            <div class="col-lg-12 col-xs-12">
+
+                <!-- start -->
+                <div class="col-lg-12 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-xs-12" style="padding-left:0px; padding-right:5px;">
+                        <label data-tooltip="Use the current time as start date time">Select Start Time</label>
+                        <label class="pretty p-switch p-fill" style="padding: 0px 10px 0px 10px;">
+                            <input type="checkbox" id="StartRightNow" onclick="UseCurrentTimeCheckBox();">
+                            <div class="state p-success">
+                                <label>&nbsp;</label>
+                            </div>
+                        </label>
+                    </div>
+                    <div id="ShowStartTime">
+                        <div class="col-lg-5 col-md-4 col-xs-12" style="padding-left:5px; padding-right:5px;">
+                            <label for="Start_Date">Start Date</label>
+                            <div class="popup">
+                                <input class="form-control hasDatepicker" id="StartD" name="StartD" type="text" value="02/28/2026" disabled="" style="">
+                                <span class="popuptext" id="DateTimeError" onclick="ShowDateTimeError();" style="width:200px;">
+                                    &nbsp; Please choose a date time after the current date time.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-4 col-xs-12" style="padding-left:5px; padding-right:0px;">
+                            <label for="Start_Time">Start Time</label>
+                            <input class="form-control ui-timepicker-input" id="StartT" name="StartT" type="text" value="05:54 PM" disabled="" style="" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <!--end-->
+                <div class="col-lg-12 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-xs-12" style="padding-left:0px; padding-right:5px;">
+                        <label data-tooltip="x">Select End Time</label>
+                        <label class="pretty p-switch p-fill" style="padding: 0px 10px 0px 10px;">
+                            <input type="checkbox" id="EndTimeChoose" name="EndTimeChoose" onclick="UseEndTimeCheckBox()">
+                            <div class="state p-success">
+                                <label>&nbsp;</label>
+                            </div>
+                        </label>
+                    </div>
+                    <div id="ShowEndTime" style="display: none;">
+                        <div class="col-lg-5 col-md-4 col-xs-12" style="padding-left:5px; padding-right:5px;">
+                            <label for="End_Date">End Date</label> 
+                            <div class="popup">                                                                                                                 
+                                <input class="form-control hasDatepicker" id="EndD" name="EndD" type="text" value="03/01/2026" disabled="" style="">
+                                <span class="popuptext" id="DateTimeError" onclick="ShowDateTimeError();" style="width:200px;">
+                                    &nbsp; Please choose a date time after the current date time.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-4 col-xs-12" style="padding-left:5px; padding-right:0px;">
+                            <label for="End_Time">End Time</label>                                                                                      
+                            
+                            <input class="form-control ui-timepicker-input" id="EndT" name="EndT" type="text" value="01:00 PM" disabled="" style="" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="col-xs-12">
+                        <label for="Total_Duration">Total Duration</label>
+                        <div class="col-lg-2 col-xs-12" style="padding-left:0px;padding-right:0px;">
+                            <button type="button" class="btn btn-success" style="width:100%;" onclick="AddQuantity();"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        <div class="col-lg-8 col-xs-12" style="font-size:1.2em;">
+                            <div class="col-lg-6 col-xs-6 text-center">
+                                <label style="margin-top:5px;"> 60 Minute(s) </label>
+                            </div>
+                            <div class="col-lg-6 col-xs-6 text-center">
+                                <label style="margin-top:5px;"> 1.00 Hours </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-xs-12" style="padding-left:0px;padding-right:0px;">
+                            <button type="button" class="btn btn-danger" style="width:100%" onclick="SubQuantity();"><span class="glyphicon glyphicon-minus"></span></button>
+                        </div>
+                    </div>
+            </div>
+                <div class="col-lg-12 col-xs-12">
+                    <div class="col-lg-6 col-md-12">
+                        <label for="License_Plate">License Plate</label>
+                        <input type="text" name="LicencePlate" id="LicencePlate" value="" class="form-control" maxlength="50" required="" style="text-transform:uppercase;">
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label for="Email">Email</label>
+                        <input type="email" name="Email" id="Email" value="" class="form-control">
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <label for="Notes">Notes</label>
+                        <textarea class="form-control" cols="20" id="Notes" name="Notes" rows="2" maxlength="100"></textarea>
+                    </div>
+                </div>
+            <div class="col-lg-12 col-xs-12">
+                <div class="col-lg-6 col-xs-12" style="text-align:center;">
+                    
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                        <label>&nbsp;</label>
+                                            <button type="submit" class="btn btn-primary" style="width:100%"><span class="glyphicon glyphicon-save"></span> &nbsp;Issue Validation</button>
+                                    </div>
+            </div>
+        </form>
+        <div class="col-lg-12 col-xs-12">
+            <div class="col-lg-4 col-xs-12">
+                <label for="Charges">Charges</label>
+                <label style="font-size:2em;" id="TotalCharges"> $3.50</label>
+            </div>
+            <div class="col-lg-8 col-xs-12">
+                <label for="Expiration_Time">Expiration Time</label>
+                <label style="font-size:2em;" id="ExpirationTime"> Saturday, Feb 28 2026 18:54:00</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    window.isTimerRunning = window.isTimerRunning || false;
+
+    function addOneMinute(timeStr) {
+        let [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+
+        if (modifier === 'PM' && hours !== 12) {
+            hours += 12;
+        }
+        if (modifier === 'AM' && hours === 12) {
+            hours = 0;
+        }
+
+        let date = new Date();
+        date.setHours(hours, minutes);
+        date.setMinutes(date.getMinutes() + 1);
+
+        let newHours = date.getHours();
+        let newMinutes = date.getMinutes();
+
+        modifier = newHours >= 12 ? 'PM' : 'AM';
+        newHours = newHours % 12 || 12;
+
+        let formattedHours = newHours.toString().padStart(2, '0');
+        let formattedMinutes = newMinutes.toString().padStart(2, '0');
+
+        let newTime = `${formattedHours}:${formattedMinutes} ${modifier}`;
+        return newTime;
+    }
+
+
+    function addOneMinuteByExpirationTime(dateStr) {
+        console.log('dateStr' + dateStr);
+
+        let date = new Date(dateStr);
+
+        console.log('data - ' + date);
+
+        date.setMinutes(date.getMinutes() + 1);
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        let newDateStr = date.toLocaleString('en-US', options);
+        return newDateStr.replace(',', '');
+    }
+
+    function startTimer() {
+        if (window.isTimerRunning) {
+            return;
+        }
+        window.isTimerRunning = true;
+        setInterval(() => {
+            const currentTime = $('#StartT').val();
+            const newTime = addOneMinute(currentTime);
+
+            const currentTimeByExpirationTime = $('#ExpirationTime').text();
+            console.log('currentTimeByExpirationTime ' + currentTimeByExpirationTime);
+            const newTimeByExpirationTime = addOneMinuteByExpirationTime(currentTimeByExpirationTime);
+
+            $('#StartT').val(newTime);
+            $('#ExpirationTime').text(newTimeByExpirationTime);
+
+            console.log(newTime);
+            console.log(newTimeByExpirationTime);
+
+        }, 60000);
+    }
+
+
+    $(document).ready(function () {
+
+        startTimer();
+
+        if ($('#EndTimeChoose').is(":checked")) {
+            $('#ShowEndTime').css('display', 'block');
+        }
+        else {
+            $('#ShowEndTime').css('display', 'none');
+        }
+
+    });
+
+    $(function () {
+                $('#LicencePlate').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+        $('#LicencePlate').on('change', function () {
+            $.post('/v2/Validation/SubmitPlate', { LicencePlate: $('#LicencePlate').val()});
+        });
+        $('#Email').on('change', function () {
+            $.post('/v2/Validation/SubmitEmail', { Email: $('#Email').val() });
+        });
+        $('#Notes').on('change', function () {
+            $.post('/v2/Validation/SubmitNotes', { Notes: $('#Notes').val() });
+        });
+
+        $("#StartD").datepicker({
+            minDate:0
+        }).on('change', function () {
+            StartDT();
+        });
+        $("#StartT").timepicker({ 'timeFormat': 'h:i A' }).on('change', function () {
+            StartDT();
+        });
+
+        $("#EndD").datepicker({
+            minDate: 0
+        }).on('change', function () {
+            EndDT();
+        });
+        $("#EndT").timepicker({ 'timeFormat': 'h:i A' }).on('change', function () {
+            EndDT();
+        });
+    });
+    function ShowDateTimeError() {
+        var popup = document.getElementById("DateTimeError");
+        popup.classList.toggle("show");
+    }
+
+    function PreSubmitValidation() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/IssueValidation', { ReadyToIssueValidation: false })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationDetail').html(data);
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                // Handle network disconnection and other errors
+                var errorMessage = 'Network connection failed, please check your connection and try again.';
+                if (jqXHR.status === 0) {
+                    errorMessage = 'Not connected, please verify your network connection.';
+                } else if (jqXHR.status == 404) {
+                    errorMessage = 'Requested page not found [404].';
+                } else if (jqXHR.status == 500) {
+                    errorMessage = 'Internal Server Error [500].';
+                } else if (textStatus === 'parsererror') {
+                    errorMessage = 'Requested JSON parse failed.';
+                } else if (textStatus === 'timeout') {
+                    errorMessage = 'Time out error.';
+                } else if (textStatus === 'abort') {
+                    errorMessage = 'Ajax request aborted.';
+                } else {
+                    errorMessage = 'Uncaught Error: ' + jqXHR.responseText;
+                }
+
+                alert(errorMessage);
+            });
+    }
+
+    function SubmitValidation() {
+        ResetTimer();
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/IssueValidation', { ReadyToIssueValidation: true })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    if ($('#Extending').val() == 'True') {
+                        $('#ValidationPanel').html(data);
+                        SearchValidations();
+                    }
+                    else {
+                        if (data.startsWith('<div id="ThisIsTheMonerisPurchaseRequestPage"></div>'))
+                        {
+                            $('#MonersiPurchaseModal .modal-body').html(data);
+                            $('#MonersiPurchaseModal').modal('show');
+                        }
+                        else {
+                            console.log(data);
+                            $('#ValidationDetail').html(data);
+                            UpdateSearchValidations();
+                        }
+                    }
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                // Handle network disconnection and other errors
+                var errorMessage = 'Network connection failed, please check your connection and try again.';
+                if (jqXHR.status === 0) {
+                    errorMessage = 'Not connected, please verify your network connection.';
+                } else if (jqXHR.status == 404) {
+                    errorMessage = 'Requested page not found [404].';
+                } else if (jqXHR.status == 500) {
+                    errorMessage = 'Internal Server Error [500].';
+                } else if (textStatus === 'parsererror') {
+                    errorMessage = 'Requested JSON parse failed.';
+                } else if (textStatus === 'timeout') {
+                    errorMessage = 'Time out error.';
+                } else if (textStatus === 'abort') {
+                    errorMessage = 'Ajax request aborted.';
+                } else {
+                    errorMessage = 'Uncaught Error: ' + jqXHR.responseText;
+                }
+
+                alert(errorMessage);
+            });
+    }
+    function SetMonerisTransactionDeclineCallback() {
+        //WHen Delince, do nothing
+        //$('#MonerisPopUpDialog').modal('hide')
+    }
+    function SetMonerisTransactionSuccessCallback() {
+        //When Succes, refresh the validationDetailPage
+        $('#loader_panel').css("display", "block");
+
+        $.post('/v2/Validation/GetUpdatedValidationDetail', { Clear : true })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    //$('#MonerisPopUpDialog').modal('hide')
+                    $('#ValidationDetail').html(data);
+                    UpdateSearchValidations();
+                }
+            });
+    }
+    function StartDT() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/ChangeStartDT', { StartDT: $('#StartD').val() + " " + $('#StartT').val() })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationDetail').html(data);
+                }
+            });
+    }
+    
+    function EndDT() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/ChangeEndDT', { EndDT: $('#EndD').val() + " " + $('#EndT').val() })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationDetail').html(data);
+                }
+            });
+    }
+
+    function UseCurrentTimeCheckBox(sel) {
+
+        $.post('/v2/Validation/ChangeStartRightNow', { StartRightNow: $('#StartRightNow').is(":checked") })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationDetail').html(data);
+                }
+            });
+    }
+    
+    function UseEndTimeCheckBox(sel) {
+        console.log($("input[name='EndTimeChoose']:checked").val());
+        console.log($('#EndTimeChoose').is(":checked"));
+        if ($('#EndTimeChoose').is(":checked")) {
+            $('#ShowEndTime').css('display', 'block');
+        }
+        else {
+            $('#ShowEndTime').css('display', 'none');
+        }
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/ChangeEndTime', { EndTime: $('#EndTimeChoose').is(":checked") })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationDetail').html(data);
+                }
+            });
+    }
+
+
+
+
+    function ByPassPaymentCheckBox() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/ChangeIsByPassPayment', { isByPassPayment: $('#ByPassPayment').is(":checked") })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+            });
+    }
+    function AddQuantity() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/AddQuantity')
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationDetail').html(data);
+            }
+        });
+    }
+    function SubQuantity() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/SubQuantity')
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationDetail').html(data);
+            }
+        });
+    }
+
+    //$(document).ready(function () {
+    //    var table = $('#ValidTimeZone').DataTable({
+    //        searching: false,
+    //        responsive: true
+    //    })
+    //});
+</script>
+
+
+        </div>
+    </div>
+</div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span style="font-family: 'Open Sans', Arial, sans-serif;">Issued Validations</span>
+                    </div>
+                    <div class="panel-body" style="background: #f4f7f8; padding:0PX;">
+                        <div class="FormLayout">
+                            
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-12">
+                                    <label for="Search_Criteria">Search Criteria</label>
+                                    <hr>
+                                    <div class="col-lg-6 col-xs-12">
+                                        <label for="Search_By">Search By</label>
+                                        <select class="form-control" id="Search_By" name="Search_By"><option selected="selected" value="0">Issue Date</option>
+<option value="1">Validation Date</option>
+</select>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <label for="Date_Range">Date Range</label>
+                                        <input id="Search_DateRange" name="Search_DateRange" type="text" value="02/28/2026 - 02/28/2026">
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="col-lg-6 col-xs-12">
+                                        <label for="License_Plate">License Plate</label>
+                                        <input class="form-control" id="Search_LicencePlate" name="Search_LicencePlate" style="text-transform:uppercase;" type="text" value="">
+                                    </div>
+                                    <div class="col-lg-6 col-xs-12">
+                                        <label> &nbsp; &nbsp; &nbsp;</label>
+                                        <button type="submit" id="submitBtn" name="Search" value="true" class="btn btn-primary" style="width:100%" onclick="SearchValidations();"><span class="glyphicon glyphicon-search"></span> &nbsp;Search</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row" style="padding-left:20px; padding-right:20px;">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="loader_panel" id="loader_panel_validations" style="display: block;">
+                                    <center>
+                                        <div class="loader">
+                                        </div>
+                                    </center>
+                                </div>
+                                <div id="ValidationScript">
+                                </div>
+
+                                <div id="ValidationList">
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    var interval;
+    var timer = function () {
+        interval = setInterval(function () {
+            UpdateSearchValidations();
+        }, 300000);
+    };
+    function ResetTimer() {
+        clearInterval(interval);
+        timer()
+    }
+    $(function () {
+        $('#Search_LicencePlate').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+        $("#Search_DateRange").daterangepicker({
+            "autoApply": true,
+            "opens": "left"
+        });
+        $("#EndDate").daterangepicker({
+            "singleDatePicker": true,
+            "autoApply": true,
+            "opens": "right"
+        });
+        $("#EndTime").timepicker({ 'timeFormat': 'h:i A' });
+        //$("#Search_FromDate").datepicker();
+        //$("#Search_ToDate").datepicker();
+        //timer();
+        SearchValidations();
+    });
+    function ShowValidationOptionConfirmation() {
+        $('#ShowValidationActionConfirmation').click();
+    }
+    function ChangeSite(sel) {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/UpdateSelectedSite', { SiteID: sel.value })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#TariffZone').html(data);
+                    UpdateValidationDetail();
+                    SearchValidations();
+                }
+        });
+    }
+    function UpdateValidationDetail()
+    {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/GetUpdatedValidationDetail')
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationDetail').html(data);
+            }
+        });
+
+    }
+    function ChangeTariff(sel) {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/UpdateSelectedTariff', { TariffID: sel.value })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationDetail').html(data);
+            }
+        });
+    }
+    function SearchValidations() {
+        ResetTimer();
+        $('#loader_panel_validations').css("display", "block");
+        $.post('/v2/Validation/SearchValidations', { Search_By: $('#Search_By').val(), Search_DateRange: $('#Search_DateRange').val(), Search_LicencePlate: $('#Search_LicencePlate').val() })
+            .always(function () {
+                $('#loader_panel_validations').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationList').html(data);
+            }
+        });
+    }
+    function UpdateSearchValidations() {
+        $('#loader_panel_validations').css("display", "block");
+        $.post('/v2/Validation/UpdateSearchValidations', { LastVID: $('#LastVID').val() })
+            .always(function () {
+                $('#loader_panel_validations').css("display", "none");
+            })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationScript').html(data);
+            }
+            //$('#ValidationTable tr:first').before(data);
+        });
+    }
+
+    function SubmitValidationChange() {
+        var type = $('#ValidationActionType').val();
+        var IDs = $('#ValidationIDs').val();
+        if (type == 'STOP') {
+            $('#loader_panel_validations').css("display", "block");
+            var EDT = $('#EndDate').val() + ' ' + $('#EndTime').val();
+            ResetTimer();
+            $.post('/v2/Validation/StopValidations', { 'IDs': IDs, EndDateTime: EDT })
+            .always(function () {
+                $('#loader_panel_validations').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationList').html(data);
+                }
+            });
+        }
+        else if (type == 'DELETE') {
+            $('#loader_panel_validations').css("display", "block");
+            ResetTimer();
+            $.post('/v2/Validation/CancelValidations', { 'IDs': IDs })
+            .always(function () {
+                $('#loader_panel_validations').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationList').html(data);
+                }
+            });
+        }
+        else if (type == 'EXTEND') {
+            $('#loader_panel').css("display", "block");
+            $.post('/v2/Validation/ExtendValidation', { 'ID': IDs})
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+            .done(function (data) {
+                if (CheckData(data)) {
+                    $('#ValidationPanel').html(data);
+                }
+            });
+        }
+    }
+
+    function CancelExtendValidation() {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Validation/CancelExtendValidation', { })
+        .always(function () {
+            $('#loader_panel').css("display", "none");
+        })
+        .done(function (data) {
+            if (CheckData(data)) {
+                $('#ValidationPanel').html(data);
+            }
+        });
+    }
+
+
+    function ConfirmStopValidation(id) {
+        $('#ValidationIDs').val(id);
+        $('#ValidationActionType').val('STOP');
+        $('#ConfirmationContext').html('Are you sure you want to stop this validation?');
+        $('#ConfirmationEndDateTime').css({ display: "block" });
+        ShowValidationOptionConfirmation();
+    }
+
+    function ConfirmDeleteValidation(id) {
+        $('#ValidationIDs').val(id);
+        $('#ValidationActionType').val('DELETE');
+        $('#ConfirmationContext').html('Are you sure you want to delete this validation?');
+        $('#ConfirmationEndDateTime').css({ display: "none" });
+        ShowValidationOptionConfirmation();
+    }
+
+
+
+    function ConfirmExtendValidation(id) {
+        $('#ValidationIDs').val(id);
+        $('#ValidationActionType').val('EXTEND');
+        $('#ConfirmationContext').html('Are you sure you want to extend this validation?');
+        $('#ConfirmationEndDateTime').css({ display: "none" });
+        ShowValidationOptionConfirmation();
+    }
+
+    function ConfirmStopSelectedValidation() {
+        var values = new Array();
+        $.each($("input[name='Selection_CS']:checked"), function () {
+            values.push($(this).val());
+        });
+        $('#ValidationIDs').val(values);
+        $('#ValidationActionType').val('STOP');
+        var currentTime = new Date();
+        currentTime.setMinutes(currentTime.getMinutes() + 1);
+        var shortTimeString = currentTime.toLocaleTimeString([], { timeStyle: 'short' });
+        $('#EndTime').val(shortTimeString);
+        $('#ConfirmationContext').html('Please select date and time to stop the validation(s). ');
+        $('#ConfirmationEndDateTime').css({ display: "block" });
+        ShowValidationOptionConfirmation();
+    }
+    function ConfirmDeleteSelectedValidation() {
+        var values = new Array();
+        $.each($("input[name='Selection_CD']:checked"), function () {
+            values.push($(this).val());
+        });
+        $('#ValidationIDs').val(values);
+        $('#ValidationActionType').val('DELETE');
+        $('#ConfirmationContext').html('Are you sure you want to delete ' + values.length + " validation(s). ");
+        $('#ConfirmationEndDateTime').css({ display: "none" });
+        ShowValidationOptionConfirmation();
+    }
+    function CheckValidationPayment(PID) {
+        $('#loader_panel').css("display", "block");
+        $.post('/v2/Moneris/CheckValidationPayment', { PID: PID })
+            .always(function () {
+                $('#loader_panel').css("display", "none");
+            })
+        .done(function (data) {
+            console.log(data);
+            if (CheckData(data)) {
+                $('#PopUpHeader').html("Transaction Detail");
+                var _PopUpBody = "<table>" +
+                    "<tr><td>Order ID:</td><td>" + data["response_order_id"] + "</td></tr>" +
+                    "<tr><td>Transaction Date Time:</td><td>" + data["TransactionDateTime"] + "</td></tr>" +
+                    "<tr><td>Bank Transaction ID:</td><td>" + data["bank_transaction_id"] + "</td></tr>" +
+                    "<tr><td>Charge Total:</td><td>" + data["charge_total"] + "</td></tr>" +
+                    "<tr><td>Bank Approval Code:</td><td>" + data["bank_approval_code"] + "</td></tr>" +
+                    "<tr><td>Response Code:</td><td>" + data["response_code"] + "</td></tr>" +
+                    "<tr><td>Iso Code:</td><td>" + data["iso_code"] + "</td></tr>" +
+                    "<tr><td>Message:</td><td>" + data["message"] + "</td></tr>" +
+                    "<tr><td>Trans Name:</td><td>" + data["trans_name"] + "</td></tr>" +
+                    "<tr><td>Card Holder:</td><td>" + data["cardholder"] + "</td></tr>" +
+                    "<tr><td>Card Number:</td><td>" + data["f4l4"] + "</td></tr>" +
+                    "<tr><td>card Type:</td><td>" + data["card"] + "</td></tr>" +
+                    //"<tr><td>Expiry Date(YYMM):</td><td>" + data["expiry_date"] + "</td></tr>" +
+                    //"<tr><td>Result:</td><td>" + data["result"] + "</td></tr>" +
+                    "<tr><td>Email:</td><td>" + data["email"] + "</td></tr>" +
+                    "<tr><td>Cust ID:</td><td>" + data["cust_id"] + "</td></tr>" +
+                    "<tr><td>Note:</td><td>" + data["note"] + "</td></tr>"
+                _PopUpBody += "</table>";
+                $('#PopUpBody').html(_PopUpBody);
+                $('#PopUpDialog').modal("show");
+            }
+        });
+    }
+
+    
+</script>
+
+        </div>
+    </div>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div class="daterangepicker dropdown-menu ltr show-calendar opensleft"><div class="calendar left"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_start" value=""><i class="fa fa-calendar glyphicon glyphicon-calendar"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="calendar right"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value=""><i class="fa fa-calendar glyphicon glyphicon-calendar"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" disabled="disabled" type="button">Apply</button> <button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button></div></div></div><div class="daterangepicker dropdown-menu ltr single opensright"><div class="calendar left single" style="display: block;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_start" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="calendar right" style="display: none;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" disabled="disabled" type="button">Apply</button> <button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button></div></div></div></body></html>

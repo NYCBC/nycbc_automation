@@ -1,0 +1,11 @@
+node_modules
+.env
+service-account.json
+.DS_Store
+coverage
+
+*.log
+*.png
+*.zip
+current_env*.json
+*_test.py
