@@ -13,7 +13,6 @@ The backend service hosts several critical endpoints running on Google Cloud Run
 - **Trigger Batch Event Invitations (Zoom)**: `https://nycbc-zoom-automation-851994718784.us-central1.run.app/api/admin/trigger-invites?key=MySecretKey123`
 - **Trigger IPASS Manual Sync**: `https://nycbc-automation-851994718784.us-central1.run.app/api/admin/trigger-ipass?key=MySecretKey123`
 - **Trigger IPASS Batch Update**: `https://nycbc-automation-851994718784.us-central1.run.app/api/admin/trigger-ipass-batch?key=MySecretKey123`
-- **Debug Sync Permissions**: `https://nycbc-automation-851994718784.us-central1.run.app/api/admin/debug-sync?key=MySecretKey123`
 
 *(Note: Admin keys are required to execute any pipeline endpoints.)*
 
